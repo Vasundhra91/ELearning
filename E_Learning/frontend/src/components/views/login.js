@@ -1,4 +1,4 @@
-import React from 'react';
+import React , { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import homeimg from '../../images/login.jpg'
+import { Redirect } from 'react-router-dom'
 
 function Copyright() {
   return (
@@ -48,9 +49,59 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function SignIn() {
+  const [Submit, setSubmit] = useState(false);
   const classes = useStyles();
-
-  return (<div style={{backgroundImage: `url(${homeimg})`}}>
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [Fname, setFname] = useState("");
+  const [ loading, setloading]= useState(false);
+  const [ redirect, setredirect]= useState(false)
+  function validateForm() {
+    return email.length > 0 && password.length > 0;
+  }
+  function handleSubmit(event) {
+    event.preventDefault();
+    const newUser={
+      Useremail:email,
+      Userpassword:password
+    }
+  
+    fetch('/users/login', {
+      method: 'POST',
+      body: JSON.stringify(newUser),
+      headers: {
+          'Content-Type': 'application/json'
+      }})
+      .then(setSubmit(true))
+      .then(name=> setFname(JSON.stringify(name)))
+      .then(res => {
+        if (res.status === 200) {
+          setloading(false);
+        } else {
+          const error = new Error(res.error);
+          throw error;
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        setloading(false) 
+        setredirect(true);
+      });
+  
+   
+  }
+  if (loading) {
+    return null;
+  }
+  if (redirect) {
+    return <Redirect to={{
+      pathname: '/Admin',
+      state: { Name: Fname }
+  }}
+/>
+  }
+  return (
+    <div style={{backgroundImage: `url(${homeimg})`}}>
     <Container component="main" maxWidth="xs" style={{background:"#FFFDD0"}}>
       <CssBaseline />
       <div className={classes.paper}>
@@ -60,7 +111,7 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form onSubmit={handleSubmit} className={classes.form} noValidate>
           <TextField
             variant="outlined"
             margin="normal"
@@ -71,6 +122,7 @@ export default function SignIn() {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={e => setEmail(e.target.value)}
           />
           <TextField
             variant="outlined"
@@ -82,6 +134,7 @@ export default function SignIn() {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={e => setPassword(e.target.value)}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -93,6 +146,7 @@ export default function SignIn() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            disabled={!validateForm()}
           >
             Sign In
           </Button>
@@ -103,7 +157,7 @@ export default function SignIn() {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/signup/" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>

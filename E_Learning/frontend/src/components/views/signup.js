@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState }  from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import homeimg from '../../images/login.jpg'
+import { Redirect } from 'react-router-dom'
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -48,7 +49,44 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignUp() {
   const classes = useStyles();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [firstName, setfirstName] = useState("");
+  const [lastName, setlastName] = useState("");
+  const [Admin, setAdmin] = useState("N");
+  const [Submit, setSubmit] = useState(false);
+  
 
+  function validateForm() {
+    return email.length > 0 && password.length > 0 && firstName.length > 0 && lastName.length > 0;
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const newUser={
+      Fname:firstName,
+      LName:lastName,
+      Useremail:email,
+      Userpassword:password,
+      UserAdmin: Admin
+    }
+  
+  fetch('/users', {
+    method: 'POST',
+    body: JSON.stringify(newUser),
+    headers: {
+        'Content-Type': 'application/json'
+    }}).then(res => res.json())
+    .then(response => console.log('Success:', JSON.stringify(response)))
+    .catch(error => console.error('Error:', error))
+    .then(setSubmit(true))
+
+    event.target.reset();
+   
+}
+if(Submit){
+  return  (<Redirect  to="./signin/"/>)}
+  else{
   return (
     <div style={{backgroundImage: `url(${homeimg})`}}>
     <Container component="main" maxWidth="xs" style={{background:"#FFFDD0"}}>
@@ -60,7 +98,7 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} noValidate>
+        <form onSubmit={handleSubmit} className={classes.form} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -72,6 +110,7 @@ export default function SignUp() {
                 id="firstName"
                 label="First Name"
                 autoFocus
+                onChange={e => setfirstName(e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -83,6 +122,7 @@ export default function SignUp() {
                 label="Last Name"
                 name="lastName"
                 autoComplete="lname"
+                onChange={e => setlastName(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -94,6 +134,7 @@ export default function SignUp() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                onChange={e => setEmail(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -106,12 +147,14 @@ export default function SignUp() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={e => setPassword(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
               <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
+                control={<Checkbox value="Y" color="primary" />}
                 label="Admin"
+                onChange={e => setAdmin(e.target.value)}
               />
             </Grid>
           </Grid>
@@ -121,12 +164,13 @@ export default function SignUp() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            disabled={!validateForm()}
           >
             Sign Up
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/signin/" variant="body2" >
                 Already have an account? Sign in
               </Link>
             </Grid>
@@ -138,5 +182,5 @@ export default function SignUp() {
       </Box>
     </Container>
   </div>
-  );
+  );}
 }

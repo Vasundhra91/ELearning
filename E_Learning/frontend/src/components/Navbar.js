@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link, NavLink } from 'react-rou
  import home from '../components/views/Home'
 import SigninPage from '../components/views/login'
  import SignupPage from '../components/views/signup'
+ import AdminPage from '../components/views/Admin'
 export default function Navbar() {
   return (
     <Router>
@@ -23,6 +24,9 @@ export default function Navbar() {
             <li className="nav-item">
               <NavLink to={'/signup'} className="nav-link">Sign Up</NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink to={'/Admin'} className="nav-link">Admin</NavLink>
+            </li>
             {/* <li><div className="form-inline my-2 my-lg-0">
               <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
               <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -35,7 +39,8 @@ export default function Navbar() {
       <Switch>
       <Route exact path='/' component={home}/>
       <Route exact path='/signin' component={SigninPage} />
-        <Route path='/signup' component={SignupPage} />
+      <Route path='/signup' component={SignupPage} />
+      <Route path='/Admin' component={AdminPage} />
       </Switch>
     </Router>
   )
