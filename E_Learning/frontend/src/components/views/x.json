@@ -1,0 +1,41 @@
+[
+    {
+        "MCQ_ques": "what is ur name",
+        "MCQ_option": {
+            "option": [
+                "shilla",
+                "naina",
+                "shalu",
+                "vasu",
+                ""
+            ]
+        },
+        "id": 0.34593844299306276
+    },
+    {
+        "MCQ_ques": "so what r u doing this sunday",
+        "MCQ_option": {
+            "option": [
+                "cooking",
+                "painting",
+                "something",
+                "nothing",
+                ""
+            ]
+        },
+        "id": 0.672497702052034
+    },
+    {
+        "MCQ_ques": "what do u like",
+        "MCQ_option": {
+            "option": [
+                "nothing",
+                "pastry",
+                "fruits",
+                "cake",
+                ""
+            ]
+        },
+        "id": 0.9875036517238742
+    }
+]

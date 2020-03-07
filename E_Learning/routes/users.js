@@ -18,6 +18,7 @@ router.get('/', function(req, res, next) {
 });
 router.post('/', function(req,res){
  LoginModel.create(req.body).then(function(data){
+   console.log(req.body)
      LoginModel.findOne({}).sort({_id:-1}).limit(1).toArray(function(error,datavalue){
          if (error){throw error} 
          //res.render('\Home',{data:datavalue});
@@ -53,4 +54,15 @@ router.post('/login', function(req, res) {
       }
     })
   })
+
+router.post('/Admin', function(req,res){
+console.log(req.body)
+    LoginModel.create(req.body).then(function(data){
+        LoginModel.find(function(error,datavalue){
+            if (error){throw error} 
+            //res.render('\Home',{data:datavalue});
+            res.json(datavalue);
+        })
+    })
+   });
 module.exports = router;
