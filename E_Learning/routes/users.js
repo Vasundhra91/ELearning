@@ -5,17 +5,11 @@ const LoginModel = require(__dirname + '../../models/login_model')
 const SubmitModel = require(__dirname + '../../models/Submit_model')
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-  // Comment out this line:
-  //res.send('respond with a resource');
-
-  // And insert something like this instead:
-  res.json([{
-    id: 1,
-    username: "Vasu"
-  }, {
-    id: 2,
-    username: "Vasundhra"
-  }]);
+  SubmitModel.find(function (error, datavalue) {
+    if (error) { throw error }
+    //res.render('\Home',{data:datavalue});
+    res.json(datavalue);
+  })
 });
 router.post('/', function (req, res) {
   LoginModel.create(req.body).then(function (data) {

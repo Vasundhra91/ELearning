@@ -10,6 +10,7 @@ const MCQ_Function = ({ MCQ_quesdetails, DeleteMCQ_quesdetails }) => {
             <span>{MCQ_option}</span>
           </div>
         })}
+        <div> Answer: {MCQ_ques.MCQ_Answer} </div>
         <button onClick={() => { DeleteMCQ_quesdetails(MCQ_ques.id) }}> Delete Item </button>
       </div>
     )

@@ -20,10 +20,10 @@ class  AddQuestion extends React.Component {
         var optionid=  this.state.MCQ_option.split(',');
         var MCQ_queslist=''
         for (var i = 0; i < optionid.length; i++) {
-            MCQ_queslist = '"'+optionid[i]+'"'+','+ MCQ_queslist
+            MCQ_queslist =  MCQ_queslist +','+'"'+optionid[i]+'"'
         }
-        console.log(MCQ_queslist)
-         data1 = '{"Ques_id":' + '"'+this.state.Ques_id+'"'+ ',"MCQ_Answer":' + '"'+this.state.MCQ_Answer+'"'+ ',"MCQ_ques":' + '"'+this.state.MCQ_ques+'"'+ ',"MCQ_option":{"option":[ '+ MCQ_queslist + '""]}}';
+         data1 = '{"Ques_id":' + '"'+this.state.Ques_id+'"'+ ',"MCQ_Answer":' + '"'+this.state.MCQ_Answer+'"'+ ',"MCQ_ques":' + '"'+this.state.MCQ_ques+'"'+ ',"MCQ_option":{"option":[ '+ MCQ_queslist.substr(1) + ']}}';
+        console.log(data1)
          this.props.AddDetails(JSON.parse(data1))
         e.target.reset();
         this.setState({

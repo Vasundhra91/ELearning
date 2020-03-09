@@ -47,7 +47,6 @@ class Admin extends React.Component {
                 <label id="lbl_success" value={this.state.labelmsg}></label>
                 <MCQ_AddQues AddDetails ={this.AddMCQDetails} />
                 <ViewAddMCQGrid MCQ_quesdetails={this.state.MCQ_ques} DeleteMCQ_quesdetails={this.DeleteMCQ_ques} />
-                
                 <form onSubmit={this.handleAddtoDb}>
                 <button type="submit">SAVE</button>
                 </form>

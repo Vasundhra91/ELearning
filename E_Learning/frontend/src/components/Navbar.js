@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Link, NavLink } from 'react-rou
 import SigninPage from '../components/views/login'
  import SignupPage from '../components/views/signup'
  import AdminPage from '../components/views/Admin'
+ import UserPage from '../components/views/User_test'
 export default function Navbar() {
   return (
     <Router>
@@ -27,6 +28,9 @@ export default function Navbar() {
             <li className="nav-item">
               <NavLink to={'/Admin'} className="nav-link">Admin</NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink to={'/User_test'} className="nav-link">User</NavLink>
+            </li>
             {/* <li><div className="form-inline my-2 my-lg-0">
               <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
               <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -41,6 +45,7 @@ export default function Navbar() {
       <Route exact path='/signin' component={SigninPage} />
       <Route path='/signup' component={SignupPage} />
       <Route path='/Admin' component={AdminPage} />
+      <Route path='/User_test' component={UserPage} />
       </Switch>
     </Router>
   )
