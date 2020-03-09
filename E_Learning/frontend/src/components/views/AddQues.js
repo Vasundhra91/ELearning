@@ -3,7 +3,9 @@ import Grid from '@material-ui/core/Grid';
 class  AddQuestion extends React.Component {
     state = {
         MCQ_option: [],
-        MCQ_ques: []
+        MCQ_ques: [],
+        MCQ_Answer: [],
+        Ques_id:Math.random()
     }
 
     handleEvent= (e) => {
@@ -20,12 +22,14 @@ class  AddQuestion extends React.Component {
         for (var i = 0; i < optionid.length; i++) {
             MCQ_queslist = '"'+optionid[i]+'"'+','+ MCQ_queslist
         }
-         data1 = '{"MCQ_ques":' + '"'+this.state.MCQ_ques+'"'+ ',"MCQ_option":{"option":[ '+ MCQ_queslist + '""]}}';
-        this.props.AddDetails(JSON.parse(data1))
+        console.log(MCQ_queslist)
+         data1 = '{"Ques_id":' + '"'+this.state.Ques_id+'"'+ ',"MCQ_Answer":' + '"'+this.state.MCQ_Answer+'"'+ ',"MCQ_ques":' + '"'+this.state.MCQ_ques+'"'+ ',"MCQ_option":{"option":[ '+ MCQ_queslist + '""]}}';
+         this.props.AddDetails(JSON.parse(data1))
         e.target.reset();
         this.setState({
             MCQ_option: "",
-            MCQ_ques:""
+            MCQ_ques:"",
+            MCQ_Answer:""
         })
     }
     }
@@ -37,6 +41,8 @@ class  AddQuestion extends React.Component {
                 <textarea type="text" id="MCQ_ques" onChange={this.handleEvent}></textarea></label>
                 <label>Option
                 <textarea type="text" id="MCQ_option" onChange={this.handleEvent}></textarea></label>
+                <label>Answer
+                <textarea type="text" id="MCQ_Answer" onChange={this.handleEvent}></textarea></label>
                 <button type="submit">Add Ques. </button>
             </form>
         )

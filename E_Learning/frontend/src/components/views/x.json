@@ -1,41 +1,30 @@
 [
     {
-        "MCQ_ques": "what is ur name",
+        "MCQ_Answer": "2",
+        "MCQ_ques": "ques",
         "MCQ_option": {
             "option": [
-                "shilla",
-                "naina",
-                "shalu",
-                "vasu",
+                "4",
+                "3",
+                "2",
+                "1",
                 ""
             ]
         },
-        "id": 0.34593844299306276
+        "id": 0.8316864605024101
     },
     {
-        "MCQ_ques": "so what r u doing this sunday",
+        "MCQ_Answer": "d",
+        "MCQ_ques": "ques2",
         "MCQ_option": {
             "option": [
-                "cooking",
-                "painting",
-                "something",
-                "nothing",
+                "d",
+                "c",
+                "b",
+                "a",
                 ""
             ]
         },
-        "id": 0.672497702052034
-    },
-    {
-        "MCQ_ques": "what do u like",
-        "MCQ_option": {
-            "option": [
-                "nothing",
-                "pastry",
-                "fruits",
-                "cake",
-                ""
-            ]
-        },
-        "id": 0.9875036517238742
+        "id": 0.9698494121766912
     }
 ]
