@@ -54,8 +54,8 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [Fname, setFname] = useState("");
-  const [ loading, setloading]= useState(false);
-  const [ redirect, setredirect]= useState(false)
+  const [loading, setloading]= useState(false);
+  const [redirect, setredirect]= useState(false)
   function validateForm() {
     return email.length > 0 && password.length > 0;
   }

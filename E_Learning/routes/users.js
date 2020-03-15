@@ -4,13 +4,16 @@ var router = express.Router();
 const LoginModel = require(__dirname + '../../models/login_model')
 const SubmitModel = require(__dirname + '../../models/Submit_model')
 /* GET users listing. */
-router.get('/', function (req, res, next) {
-  SubmitModel.find(function (error, datavalue) {
+router.post('/id', function (req, res, next) {
+ // SubmitModel.find({Ques_id:req.body.Ques_id}).toArray(function (error, datavalue) {
+  var query = {Ques_id: req.body.Ques_id };
+  SubmitModel.find(query,function(error,datavalue){
+  //find(query).toArray,(function (error, datavalue) {
     if (error) { throw error }
-    //res.render('\Home',{data:datavalue});
     res.json(datavalue);
   })
 });
+
 router.post('/', function (req, res) {
   LoginModel.create(req.body).then(function (data) {
     console.log(req.body)
@@ -60,4 +63,14 @@ router.post('/Admin', function (req, res) {
     })
   })
 });
+
+router.get('/AdminTestPaper', function (req, res) {
+  SubmitModel.aggregate([{"$group": {"_id": "$Ques_id"}}
+  ]).exec(function(error, fetchAllTopUsers){
+    if (error) { throw error }
+    res.json(fetchAllTopUsers);
+  });
+});
+
+
 module.exports = router;

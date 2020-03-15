@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import { green } from '@material-ui/core/colors';
 import Radio from '@material-ui/core/Radio';
 export default class User_test extends Component {
     state = {
@@ -11,9 +9,20 @@ export default class User_test extends Component {
     }
 
     componentDidMount() {
-        fetch('/users')
-            .then(res => res.json())
-            .then(users => this.setState({ users }));
+     const newUser={Ques_id:this.props.location.state.id}
+       fetch('/users/id', {
+        method: 'POST',
+        body: JSON.stringify(newUser),
+        headers: {
+            'Content-Type': 'application/json'
+        }}).then(res => res.json())
+        //.then(response => console.log('Success:', JSON.stringify(response)))
+        .then(users => this.setState({ users }))
+        .catch(error => console.error('Error:', error))
+                
+        // fetch('/users')
+        //     .then(res => res.json())
+        //     .then(users => this.setState({ users }));
     }
     handleSumbmitEvent = (e) => {
         e.preventDefault();
@@ -64,7 +73,7 @@ export default class User_test extends Component {
                         return <div key={i}>
                             <label>
                                 <Radio
-                                    checked={this.state.selectedValue === {MCQ_option}}
+                                   // checked={this.state.selectedValue === {MCQ_option}}
                                     onChange={handleChange}
                                     id={MCQ_ques._id}
                                     value={MCQ_option}
