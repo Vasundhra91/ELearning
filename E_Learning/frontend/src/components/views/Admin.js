@@ -34,13 +34,16 @@ class Admin extends React.Component {
             headers: {
                 'Content-Type': 'application/json'
             }
-        }).then(res => res.json())
-        .then(response => console.log('Success:', JSON.stringify(response)))
-        .then(setSubmit => this.setState({ setSubmit }))
-        .catch(error => console.error('Error:', error))  
+        }).then(setSubmit => this.setState({ setSubmit }))
+        .catch(error => console.error('Error:', error))
+        
+        console.log(this.state.setSubmit)
+        if(this.state.setSubmit===1)
+        {this.setState({labelmsg:"Saved Successfully"})}
         e.target.reset();
     }
     render() {
+      
         return (
             <div className="App">
                 <h2>MCQ</h2>

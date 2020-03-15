@@ -5,10 +5,8 @@ const LoginModel = require(__dirname + '../../models/login_model')
 const SubmitModel = require(__dirname + '../../models/Submit_model')
 /* GET users listing. */
 router.post('/id', function (req, res, next) {
- // SubmitModel.find({Ques_id:req.body.Ques_id}).toArray(function (error, datavalue) {
   var query = {Ques_id: req.body.Ques_id };
   SubmitModel.find(query,function(error,datavalue){
-  //find(query).toArray,(function (error, datavalue) {
     if (error) { throw error }
     res.json(datavalue);
   })
